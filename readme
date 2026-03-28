@@ -1,0 +1,58 @@
+# 🌾 Farmlens AI
+
+🚀 Empowering farmers with AI-driven insights for smarter and sustainable agriculture.
+
+---
+
+##  Overview
+
+Farmlens AI is a smart farming web application that analyzes crop images to determine plant health using **K-Means image segmentation**. The platform provides actionable insights such as irrigation advice, pest control, and government support schemes to help farmers adopt **technology-driven agriculture**.
+
+---
+
+## Features
+
+-  Crop Health Detection (Healthy vs Unhealthy)
+- Image Segmentation using K-Means Clustering
+- Visual Output (Segmented Image + Pie Chart)
+-  Smart Insights:
+  - Irrigation advice
+  - Pest & disease control
+  - Fertilizer recommendations
+  - Government schemes & helpline
+-  Modern UI with animations
+-  Image upload with preview
+
+---
+
+##  Tech Stack
+
+| Category        | Technology Used |
+|----------------|----------------|
+| Frontend       | HTML, CSS, JavaScript |
+| Backend        | Python (Flask) |
+| ML Technique   | K-Means Clustering |
+| Visualization  | Chart.js |
+| Styling        | Custom CSS (Modern UI + Animations) |
+
+---
+
+##  How It Works
+
+1. User uploads a crop image  
+2. Image is processed using **K-Means clustering**  
+3. Pixels are segmented into clusters (healthy vs unhealthy)  
+4. Percentage of each category is calculated  
+5. Results are displayed with:
+   - Segmented image
+   - Pie chart visualization
+   - AI-based insights  
+
+---
+
+## Installation & Setup
+
+### Clone the repository
+```bash
+git clone https://github.com/your-username/farmlens-ai.git
+cd farmlens-ai
