@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Farmlens AI</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+
+    <!-- ✅ Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <div class="logo">Farmlens AI</div>
+
+    <div class="nav-links">
+        <a href="#">Solutions</a>
+        <a href="#">Technology</a>
+        <a href="#">Pricing</a>
+        <a href="#">Resources</a>
+    </div>
+
+    <div class="nav-buttons">
+        <button class="btn btn-outline">Sign In</button>
+        <button class="btn btn-primary">Get Demo</button>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="badge">✨ Powered by AI & Machine Learning</div>
+
+    <h1>
+        The Future of <br>
+        <span class="highlight">Intelligent Farming</span>
+    </h1>
+
+    <p>
+        Maximize yields, minimize costs, and optimize every acre with AI-driven insights.
+    </p>
+
+    <div class="hero-buttons">
+        <button class="btn-large btn-glow">Start Free Trial</button>
+        <button class="btn-large btn-secondary">Learn More</button>
+    </div>
+</section>
+
+<!-- SHOWCASE -->
+<section class="showcase">
+    <div class="showcase-grid">
+
+        <div class="left">
+            <img src="{{ url_for('static', filename='images/farm1.jpg') }}">
+        </div>
+
+        <div class="right">
+            <img src="{{ url_for('static', filename='images/farm2.jpg') }}">
+            <img src="{{ url_for('static', filename='images/farm3.jpg') }}">
+        </div>
+
+        <div class="score-card">
+            <p>Crop Health Score <span>Excellent</span></p>
+            <h2>94.5 <span>+12%</span></h2>
+
+            <div class="progress-bar">
+                <div class="progress"></div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- STATS -->
+<section class="stats-section">
+    <div class="stats">
+
+        <div class="stat">
+            <h2>98%</h2>
+            <p>Accuracy Rate</p>
+        </div>
+
+        <div class="stat">
+            <h2>24/7</h2>
+            <p>Monitoring</p>
+        </div>
+
+        <div class="stat">
+            <h2>50K+</h2>
+            <p>Active Users</p>
+        </div>
+
+    </div>
+</section>
+
+<!-- ML SECTION -->
+<section class="ml-section">
+
+<div class="upload-wrapper">
+
+    <h2>🌿 Try Farmlens AI</h2>
+    <p class="subtitle">Upload a crop image and get instant AI-powered insights</p>
+
+    <form action="/analyze" method="POST" enctype="multipart/form-data" class="upload-box">
+
+        <!-- CUSTOM FILE UPLOAD -->
+        <label for="fileInput" class="upload-area">
+            <div class="upload-content">
+                <p class="upload-icon">📤</p>
+                <p class="upload-text">Click to upload or drag & drop</p>
+                <span class="file-name" id="fileName">No file selected</span>
+            </div>
+        </label>
+
+        <input type="file" name="file" id="fileInput" hidden required>
+
+        <!-- IMAGE PREVIEW -->
+        <img id="preview" class="preview-img">
+
+        <!-- BUTTON -->
+        <button type="submit" class="analyze-btn">
+            🚀 Analyze Crop
+        </button>
+
+    </form>
+
+</div>
+   {% if segmented %}
+<div class="result-box">
+    <h3>🌿 Analysis Result</h3>
+
+    <div class="image-results">
+
+        <div class="img-card">
+            <p>Original Image</p>
+            <img src="{{ url_for('static', filename=original) }}">
+        </div>
+
+        <div class="img-card">
+            <p>Segmented Image</p>
+            <img src="{{ url_for('static', filename=segmented) }}">
+        </div>
+
+    </div>
+    {% if segmented %}
+<section class="insights-section">
+
+    <h2>🌾 Know Your Crop Better</h2>
+
+    <div class="insights-grid">
+
+        <!-- ANALYSIS -->
+        <div class="insight-card">
+            <h3>📊 Crop Analysis</h3>
+            <p>
+                Based on the AI segmentation, your crop shows 
+                <strong>{{ healthy }}%</strong> healthy vegetation and 
+                <strong>{{ unhealthy }}%</strong> stressed areas.
+            </p>
+
+            {% if unhealthy > 30 %}
+            <p class="alert">⚠️ Significant stress detected. Immediate action recommended.</p>
+            {% elif unhealthy > 10 %}
+            <p class="warning">⚡ Moderate stress detected. Monitor closely.</p>
+            {% else %}
+            <p class="good">✅ Crop condition is healthy.</p>
+            {% endif %}
+        </div>
+
+        <!-- IRRIGATION -->
+        <div class="insight-card">
+            <h3>💧 Irrigation Advice</h3>
+            <ul>
+                <li>Maintain consistent soil moisture</li>
+                <li>Avoid overwatering to prevent root diseases</li>
+                <li>Use drip irrigation for efficiency</li>
+                <li>Water early morning or evening</li>
+            </ul>
+        </div>
+
+        <!-- PESTICIDES -->
+        <div class="insight-card">
+            <h3>🧪 Pest & Disease Control</h3>
+            <ul>
+                <li>Inspect leaves for discoloration or spots</li>
+                <li>Use neem-based organic pesticides</li>
+                <li>Rotate crops to prevent disease buildup</li>
+                <li>Consult local agri experts if infection spreads</li>
+            </ul>
+        </div>
+
+        <!-- FERTILIZER -->
+        <div class="insight-card">
+            <h3>🌱 Nutrient Tips</h3>
+            <ul>
+                <li>Use nitrogen-rich fertilizers for growth</li>
+                <li>Add compost for soil health</li>
+                <li>Test soil before adding chemicals</li>
+                <li>Balance NPK ratio properly</li>
+            </ul>
+        </div>
+
+        <!-- GOVERNMENT -->
+        <div class="insight-card">
+            <h3>🏛️ Government Support</h3>
+            <ul>
+                <li>PM-KISAN Scheme for financial aid</li>
+                <li>Soil Health Card Scheme</li>
+                <li>Crop Insurance (PMFBY)</li>
+                <li>Kisan Call Center: ☎️ 1800-180-1551</li>
+            </ul>
+        </div>
+
+        <!-- GENERAL -->
+        <div class="insight-card">
+            <h3>📌 General Recommendations</h3>
+            <ul>
+                <li>Regularly monitor crop growth</li>
+                <li>Use AI tools like Farmlens for tracking</li>
+                <li>Maintain proper spacing between plants</li>
+                <li>Remove weeds frequently</li>
+            </ul>
+        </div>
+
+    </div>
+
+</section>
+{% endif %}
+
+    <!-- ✅ PIE CHART -->
+    <div class="chart-container">
+        <canvas id="cropChart"></canvas>
+    </div>
+
+    <div class="result-stats">
+        <p>Healthy: <span>{{ healthy }}%</span></p>
+        <p>Unhealthy: <span>{{ unhealthy }}%</span></p>
+    </div>
+
+</div>
+{% endif %}
+
+</section>
+<section class="tech-section">
+
+    <h2 class="tech-heading">🚀 The Tech Behind Farmlens AI</h2>
+
+    <div class="tech-container">
+
+        <!-- LEFT CONTENT -->
+        <div class="tech-text">
+
+            <p>
+                At Farmlens AI, we aim to simplify advanced agricultural technology for everyday farmers.
+                Our current system uses <strong>K-Means clustering</strong> to segment crop images and
+                identify healthy and unhealthy regions.
+            </p>
+
+            <p>
+                The analysis is based on foundational image processing techniques and logical evaluation.
+                While the current model provides useful insights, it is built with simplicity and accessibility in mind.
+            </p>
+
+            <p>
+                Our goal is not just accuracy, but adoption — helping farmers become comfortable with
+                <strong>smart farming technologies</strong> and AI-driven decision making.
+            </p>
+
+            <p>
+                🚧 We are actively developing more advanced models including deep learning,
+                disease detection, and real-time monitoring systems to enhance precision and reliability.
+            </p>
+
+            <p class="highlight-line">
+                🌱 Farmlens is a step towards a smarter, more connected agricultural future.
+            </p>
+
+        </div>
+
+        <!-- RIGHT IMAGE -->
+        <div class="tech-image">
+            <img src="{{ url_for('static', filename='images/image5.jpg') }}" alt="Technology Image">
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ✅ FILE PREVIEW -->
+<script>
+document.getElementById("fileInput").onchange = function (event) {
+  const [file] = event.target.files;
+  if (file) {
+    const preview = document.getElementById("preview");
+    preview.src = URL.createObjectURL(file);
+    preview.style.display = "block";
+  }
+};
+</script>
+
+<!-- ✅ FIXED CHART SCRIPT -->
+{% if segmented %}
+<script>
+window.onload = function () {
+    const ctx = document.getElementById('cropChart');
+
+    if (ctx) {
+        new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ['Healthy', 'Unhealthy'],
+                datasets: [{
+                    data: [{{ healthy }}, {{ unhealthy }}],
+                    backgroundColor: ['#22c55e', '#ef4444'],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: 'white'
+                        }
+                    }
+                }
+            }
+        });
+    }
+};
+</script>
+{% endif %}
+
+</script>
+</body>
+</html>
