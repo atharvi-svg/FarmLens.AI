@@ -8,7 +8,8 @@ app = Flask(__name__)
 
 UPLOAD_FOLDER = "static/uploads"
 
-if not os.path.exists(UPLOAD_FOLDER):
+# Create uploads folder only if it doesn't exist
+if not os.path.isdir(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
 
 @app.route("/")
@@ -17,9 +18,10 @@ def home():
 
 @app.route("/analyze", methods=["POST"])
 def analyze():
-    file = request.files["file"]
+    file = request.files.get("file")
 
-    if file:
+    if file and file.filename:
+
         # Save original image
         filepath = os.path.join(UPLOAD_FOLDER, file.filename)
         file.save(filepath)
@@ -37,14 +39,13 @@ def analyze():
 
         return render_template(
             "index.html",
-            original="uploads/" + file.filename,          # ✅ original added
+            original="uploads/" + file.filename,
             segmented="uploads/" + seg_filename,
             healthy=round(healthy, 2),
             unhealthy=round(unhealthy, 2)
         )
 
     return render_template("index.html")
-
 
 if __name__ == "__main__":
     app.run(debug=True)
